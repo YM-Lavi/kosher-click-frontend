@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // שים כאן את המפתח שלך מגוגל
-const GOOGLE_API_KEY = ""; 
-
+const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 function App() {
   const [city, setCity] = useState('');
   const [street, setStreet] = useState('');
