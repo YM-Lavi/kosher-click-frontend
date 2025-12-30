@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // שים כאן את המפתח שלך מגוגל
-const GOOGLE_API_KEY = "AIzaSyDFXhgayndgiKqXWJEeZ4j5zPCVgvW2N8g"; 
+const GOOGLE_API_KEY = ""; 
 
 function App() {
   const [city, setCity] = useState('');
