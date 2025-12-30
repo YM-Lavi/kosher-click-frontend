@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  // הגדרות אלו עוזרות למנוע את שגיאת "React is not defined" בגרסאות חדשות
   esbuild: {
+    // השורה הזו פותרת את השגיאה "React is not defined"
     jsxInject: `import React from 'react'`
   }
 })
