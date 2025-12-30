@@ -11,8 +11,7 @@ function App() {
   const [hasSearched, setHasSearched] = useState(false);
 
   // כתובת השרת שלך ב-Render
-  const API_URL = "https://kosher-click.onrender.com/";
-
+const API_URL = "https://kosher-click.onrender.com";
   const handleSearch = async () => {
     if (!city.trim()) {
       alert("אנא הזן שם עיר");
@@ -25,9 +24,9 @@ function App() {
     try {
       // פנייה לשרת האמיתי ולא ל-localhost
       const response = await axios.post(`${API_URL}/restaurants/load-restaurants`, { 
-        city: city.trim(), 
-        street: street.trim() 
-      });
+    city: city.trim(), 
+    street: street.trim() 
+  });
       
       setRestaurants(response.data);
     } catch (error) {
