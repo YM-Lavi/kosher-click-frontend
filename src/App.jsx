@@ -6,9 +6,7 @@ function App() {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // השתמש בכתובת של Render עבור ה-API
   const BACKEND_URL = "https://kosher-click.onrender.com";
-  // מפתח ה-API מהגדרות Vercel לצורך הצגת תמונות
   const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
   const handleSearch = async () => {
@@ -30,23 +28,23 @@ function App() {
       <div className="max-w-6xl mx-auto text-center">
         <h1 className="text-5xl font-extrabold mb-8 text-yellow-500">Kosher Click</h1>
         
-        <div className="flex flex-col md:flex-row gap-4 justify-center mb-12">
-            <form onSubmit={(e) => { e.preventDefault(); handleSearch(); }} className="flex flex-col md:flex-row gap-4 justify-center mb-12">
-              <input
-                type="text"
-                placeholder="באיזו עיר תרצה לאכול?"
-                className="px-6 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 w-full md:w-96"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-              />
-              <button
-                type="submit" // שינוי ל-submit גורם ל-Enter לעבוד בתוך form
-                className="px-8 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-lg transition-colors"
-              >
-                {loading ? "מחפש..." : "מצא אוכל כשר"}
-              </button>
-            </form>
-        </div>
+        {/* ה-form מתוקן כאן ללא העטיפה המיותרת */}
+        <form onSubmit={(e) => { e.preventDefault(); handleSearch(); }} className="flex flex-col md:flex-row gap-4 justify-center mb-12">
+          <input
+            type="text"
+            placeholder="באיזו עיר תרצה לאכול?"
+            className="px-6 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 w-full md:w-96 text-right"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className="px-8 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-lg transition-colors disabled:opacity-50"
+          >
+            {loading ? "מחפש..." : "מצא אוכל כשר"}
+          </button>
+        </form>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {restaurants.map((res) => (
