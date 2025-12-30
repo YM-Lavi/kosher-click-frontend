@@ -11,6 +11,9 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
+  // כתובת השרת שלך ב-Render
+  const API_URL = "https://kosher-click-backend.onrender.com";
+
   const handleSearch = async () => {
     if (!city.trim()) {
       alert("אנא הזן שם עיר");
@@ -21,7 +24,8 @@ function App() {
     setHasSearched(true);
     
     try {
-      const response = await axios.post('http://localhost:5000/restaurants/load-restaurants', { 
+      // פנייה לשרת האמיתי ולא ל-localhost
+      const response = await axios.post(`${API_URL}/restaurants/load-restaurants`, { 
         city: city.trim(), 
         street: street.trim() 
       });
@@ -29,7 +33,7 @@ function App() {
       setRestaurants(response.data);
     } catch (error) {
       console.error("Search failed:", error);
-      alert("שגיאה בחיבור לשרת");
+      alert("שגיאה בחיבור לשרת. וודא שהשרת ב-Render פעיל.");
     } finally {
       setLoading(false);
     }
@@ -95,7 +99,7 @@ function App() {
                     src={getPhotoUrl(res.photoReference)} 
                     alt={res.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    onError={(e) => e.target.src = 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500'}
+                    onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500'; }}
                   />
                   <div className="absolute top-4 left-4 bg-white/95 px-3 py-1.5 rounded-2xl text-sm font-black text-slate-900 shadow-md">
                     ⭐ {res.rating || 'N/A'}
