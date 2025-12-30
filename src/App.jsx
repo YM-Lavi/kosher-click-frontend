@@ -12,7 +12,7 @@ function App() {
   const [hasSearched, setHasSearched] = useState(false);
 
   // כתובת השרת שלך ב-Render
-  const API_URL = "https://kosher-click-backend.onrender.com";
+  const API_URL = "https://kosher-click.onrender.com";
 
   const handleSearch = async () => {
     if (!city.trim()) {
