@@ -52,11 +52,14 @@ function App() {
               <div className="h-48 w-full relative bg-gray-700">
                 <img
                   src={res.photoReference 
-                    ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${res.photoReference}&key=${GOOGLE_API_KEY}`
+                    ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${res.photoReference}&key=${GOOGLE_API_KEY}`
                     : "https://via.placeholder.com/400x200?text=No+Image"}
                   alt={res.name}
                   className="w-full h-full object-cover"
-                  onError={(e) => e.target.src = "https://via.placeholder.com/400x200?text=Image+Error"}
+                  onError={(e) => {
+                    console.log("Image load error for:", res.name);
+                    e.target.src = "https://via.placeholder.com/400x200?text=Image+Error";
+                  }}
                 />
                 <div className="absolute top-2 right-2 bg-black/70 px-2 py-1 rounded text-yellow-400 font-bold">
                   ⭐ {res.rating}
