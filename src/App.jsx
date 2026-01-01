@@ -58,7 +58,7 @@ function App() {
         </form>
 
         {loading && <p className="text-yellow-400 text-xl mb-6">טוען מסעדות...</p>}
-        {!loading && restaurants.length === 0 && <p className="text-gray-400 text-lg">לא נמצאו מסעדות.</p>}
+        {!loading && restaurants.length === 0 && <p className="text-gray-400 text-lg">מה אוכלים היום?</p>}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {restaurants.map((r) => (
@@ -67,7 +67,7 @@ function App() {
                 <img
                   src={
                     r.photos && r.photos.length > 0
-                      ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${r.photos[0].photo_reference}&key=YOUR_GOOGLE_API_KEY`
+                      ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${r.photos[0].photo_reference}&key=VITE_GOOGLE_API_KEY`
                       : 'https://via.placeholder.com/400x200?text=No+Image'
                   }
                   alt={r.name}
