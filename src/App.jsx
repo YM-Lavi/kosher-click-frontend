@@ -9,18 +9,19 @@ function App() {
   const BACKEND_URL = 'https://kosher-click.onrender.com';
 
   const handleSearch = async () => {
-    if (!city) return alert('אנא הזן עיר');
+    if (!city.trim()) return alert('אנא הזן מיקום');
 
     setLoading(true);
     try {
       const res = await axios.post(
         `${BACKEND_URL}/restaurants/load-restaurants`,
-        { city }
+        { location: city.trim() }, // ✅ כאן שולחים location ל-Backend
+        { headers: { 'Content-Type': 'application/json' } }
       );
       setRestaurants(res.data);
     } catch (err) {
       console.error(err);
-      alert('שגיאה בטעינת מסעדות');
+      alert(err.response?.data?.error || 'שגיאה בטעינת מסעדות');
     } finally {
       setLoading(false);
     }
@@ -29,7 +30,6 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8 rtl" dir="rtl">
       <div className="max-w-6xl mx-auto text-center">
-
         <h1 className="text-5xl font-extrabold mb-8 text-yellow-500">
           Kosher Click
         </h1>
@@ -44,7 +44,7 @@ function App() {
           <input
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            placeholder="באיזו עיר תרצה לאכול?"
+            placeholder="באיזו עיר / אזור תרצה לאכול?"
             className="px-6 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white w-full md:w-96 text-right"
           />
 
@@ -73,7 +73,6 @@ function App() {
                   alt={r.name}
                   className="w-full h-full object-cover"
                 />
-
                 <div className="absolute top-2 right-2 bg-black/70 px-2 py-1 rounded text-yellow-400">
                   ⭐ {r.rating}
                 </div>
@@ -100,7 +99,6 @@ function App() {
             </div>
           ))}
         </div>
-
       </div>
     </div>
   );
