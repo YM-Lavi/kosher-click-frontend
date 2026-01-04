@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function App() {
-  const [location, setlocation] = useState('');
+  const [city, setCity] = useState('');
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const BACKEND_URL = 'https://kosher-click.onrender.com';
 
   const handleSearch = async () => {
-    if (!location) return alert('אנא הזן עיר');
+    if (!city) return alert('אנא הזן עיר');
 
     setLoading(true);
     try {
       const res = await axios.post(
         `${BACKEND_URL}/restaurants/load-restaurants`,
-        { location }
+        { city }
       );
       setRestaurants(res.data);
     } catch (err) {
@@ -42,8 +42,8 @@ function App() {
           className="flex flex-col md:flex-row gap-4 justify-center mb-12"
         >
           <input
-            value={location}
-            onChange={(e) => setlocation(e.target.value)}
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
             placeholder="באיזו עיר תרצה לאכול?"
             className="px-6 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white w-full md:w-96 text-right"
           />
@@ -107,4 +107,3 @@ function App() {
 }
 
 export default App;
-
